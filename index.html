@@ -284,7 +284,7 @@ function statusText(){
  if(dirty&&Date.now()-dirtyAt>120000)return'Changes not synced yet. Tap to retry';
  if(dirty)return'Saved on this phone, syncing soon';
  return'Synced '+ago(lastSync)}
-function status(){const t=statusText(),a=$('syncTxt'),b=$('setStatus'),btn=$('syncBtn');if(a)a.textContent=t;if(b)b.textContent=t;if(btn)btn.classList.toggle('problem',!cfg.token||err==='auth'||(!!err&&navigator.onLine)||(dirty&&Date.now()-dirtyAt>120000))}
+function status(){const t=statusText(),a=$('syncTxt'),b=$('setStatus'),btn=$('syncBtn');if(a)a.textContent=t;if(b)b.textContent=t;if(btn){const p=!cfg.token||err==='auth'||(!!err&&navigator.onLine)||(dirty&&Date.now()-dirtyAt>120000);btn.classList.toggle('problem',p);btn.style.display=p?'':'none'}}
 function openSet(){$('setRepo').value=cfg.repo;$('setToken').value='';status();$('settings').hidden=false}
 function closeSet(){$('settings').hidden=true}
 $('syncBtn').addEventListener('click',()=>{if(cfg.token&&!syncing)sync();openSet()});
